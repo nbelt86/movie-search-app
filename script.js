@@ -9,10 +9,12 @@ searchBtn.addEventListener("click", async () => {
   const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
   const response = await fetch(url);
   const movieData = await response.json();
-  resultsSection.innerHTML = movieData.Search.map(movie => `
-    <div class = "movie-card">
-      <img src="${movie.Poster}" alt="${movie.Title}">
-      <h3>${movie.Title}</h3>
-    </div>
-    `).join("");
+  if (movieData.Response === "True") {
+    resultsSection.innerHTML = movieData.Search.map(movie => `
+      <div class = "movie-card">
+        <img src="${movie.Poster}" alt="${movie.Title}">
+        <h3>${movie.Title}</h3>
+      </div>
+      `).join("")}
+  else resultsSection.innerHTML = "No movie found!";
 });
