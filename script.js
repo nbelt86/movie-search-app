@@ -25,7 +25,10 @@ async function searchMovies() {
         <h3>${movie.Title}</h3>
       </div>
       `).join("")}
+
   else resultsSection.innerHTML = "No movie found!";
+
+  searchInput.value = ""
 };
 
 searchBtn.addEventListener("click", searchMovies);
