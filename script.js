@@ -7,28 +7,31 @@ const resultsSection = document.querySelector("#results");
 async function searchMovies() {
   const searchTerm = searchInput.value.trim();
 
-  if (searchTerm === "") {
-    resultsSection.innerHTML = "Please enter a movie title.";
-    return;
+  try {
+    if (searchTerm === "") {
+      resultsSection.innerHTML = "Please enter a movie title.";
+      return;
+    }
+    resultsSection.innerHTML = "Searching...please wait.";
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
+    const response = await fetch(url);
+    const movieData = await response.json();
+
+    if (movieData.Response === "True") {
+      resultsSection.innerHTML = movieData.Search.map(movie => `
+        <div class = "movie-card">
+          <img src="${movie.Poster}" alt="${movie.Title}">
+          <h3>${movie.Title}</h3>
+        </div>
+        `).join("")}
+
+    else resultsSection.innerHTML = "No movie found!";
+
+    searchInput.value = ""
+  } catch (error) {
+    resultsSection.innerHTML = "Something went wrong. Please try again."
   }
 
-  resultsSection.innerHTML = "Searching...please wait.";
-
-  const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
-  const response = await fetch(url);
-  const movieData = await response.json();
-
-  if (movieData.Response === "True") {
-    resultsSection.innerHTML = movieData.Search.map(movie => `
-      <div class = "movie-card">
-        <img src="${movie.Poster}" alt="${movie.Title}">
-        <h3>${movie.Title}</h3>
-      </div>
-      `).join("")}
-
-  else resultsSection.innerHTML = "No movie found!";
-
-  searchInput.value = ""
 };
 
 searchBtn.addEventListener("click", searchMovies);
