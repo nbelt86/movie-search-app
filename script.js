@@ -5,11 +5,16 @@ const searchBtn = document.querySelector("#search-btn");
 const resultsSection = document.querySelector("#results");
 
 async function searchMovies() {
-  const searchTerm = searchInput.value;
+  const searchTerm = searchInput.value.trim();
+
+  if (searchTerm === "") {
+    resultsSection.innerHTML = "Please enter a movie title."
+    return;
+  }
+
   const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
   const response = await fetch(url);
   const movieData = await response.json();
-
 
   if (movieData.Response === "True") {
     resultsSection.innerHTML = movieData.Search.map(movie => `
