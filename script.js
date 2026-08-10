@@ -8,9 +8,11 @@ async function searchMovies() {
   const searchTerm = searchInput.value.trim();
 
   if (searchTerm === "") {
-    resultsSection.innerHTML = "Please enter a movie title."
+    resultsSection.innerHTML = "Please enter a movie title.";
     return;
   }
+
+  resultsSection.innerHTML = "Searching...please wait.";
 
   const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
   const response = await fetch(url);
