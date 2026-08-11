@@ -21,7 +21,8 @@ async function searchMovies() {
       resultsSection.innerHTML = movieData.Search.map(movie => `
         <div class = "movie-card">
           <img src="${movie.Poster}" alt="${movie.Title}">
-          <h3>${movie.Title}</h3>
+          <h3>${movie.Title} (${movie.Year})</h3>
+
         </div>
         `).join("")}
 
