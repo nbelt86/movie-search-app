@@ -19,7 +19,7 @@ async function searchMovies() {
 
     if (movieData.Response === "True") {
       resultsSection.innerHTML = movieData.Search.map(movie => `
-        <div class = "movie-card">
+        <div class = "movie-card" data-imdbid = "${movie.imdbID}">
           <img src="${movie.Poster}" alt="${movie.Title}">
           <h3>${movie.Title} (${movie.Year})</h3>
 
@@ -39,5 +39,13 @@ searchBtn.addEventListener("click", searchMovies);
 searchInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     searchMovies();
+  }
+});
+
+resultsSection.addEventListener("click", (event) => {
+  const card = event.target.closest(".movie-card");
+  if (card) {
+    const imdbId = card.dataset.imdbid;
+    console.log(imdbId);
   }
 });
