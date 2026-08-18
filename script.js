@@ -3,6 +3,8 @@ const apiKey = "e105a334";
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const resultsSection = document.querySelector("#results");
+const movieArray = ["Inception", "The Matrix", "Interstellar", "Parasite"];
+const carouselTrack = document.querySelector("#carousel-track");
 
 async function searchMovies() {
   const searchTerm = searchInput.value.trim();
@@ -52,3 +54,14 @@ resultsSection.addEventListener("click", async (event) => {
     alert (`${details.Title}\n\n${details.Plot}\n\nRating: ${details.imdbRating}`);
   }
 });
+
+async function loadPopularMovies() {
+  for (const title of movieArray) {
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`;
+    const response = await fetch(url);
+    const movieData = await response.json();
+    carouselTrack.innerHTML += `<img class="carousel-poster"
+    src="${movieData.Search[0].Poster}">`;
+  }};
+
+loadPopularMovies();
