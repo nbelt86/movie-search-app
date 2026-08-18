@@ -3,7 +3,12 @@ const apiKey = "e105a334";
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const resultsSection = document.querySelector("#results");
-const movieArray = ["Inception", "The Matrix", "Interstellar", "Parasite"];
+const movieArray = ["Inception", "The Matrix", "Interstellar", "Parasite",
+  "The Dark Knight", "Pulp Fiction", "Fight Club", "Forrest Gump", "The Godfather",
+  "Titanic", "Jurassic Park", "The Shawshank Redemption", "Gladiator",
+  "Spirited Away", "La La Land", "Whiplash", "Avengers: Endgame",
+  "Get Out", "Everything Everywhere All at Once"
+];
 const carouselTrack = document.querySelector("#carousel-track");
 
 async function searchMovies() {
@@ -68,5 +73,9 @@ loadPopularMovies();
 
 setInterval(() => {
   carouselTrack.scrollLeft += 150;
+  if (carouselTrack.clientWidth + carouselTrack.scrollLeft >=
+    carouselTrack.scrollWidth) {
+    carouselTrack.scrollLeft = 0
+  }
 
 }, 1000);
