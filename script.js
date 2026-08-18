@@ -65,3 +65,8 @@ async function loadPopularMovies() {
   }};
 
 loadPopularMovies();
+
+setInterval(() => {
+  carouselTrack.scrollLeft += 150;
+
+}, 1000);
