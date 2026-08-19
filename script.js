@@ -11,6 +11,7 @@ const movieArray = ["Inception", "The Matrix", "Interstellar", "Parasite",
 ];
 const carouselTrack = document.querySelector("#carousel-track");
 let ringAngle = 0;
+const popularMovies = document.querySelector("#popular-movies");
 
 
 
@@ -22,6 +23,9 @@ async function searchMovies() {
       resultsSection.innerHTML = "Please enter a movie title.";
       return;
     }
+
+    popularMovies.style.display = "none";
+
     resultsSection.innerHTML = "Searching...please wait.";
     const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
     const response = await fetch(url);
