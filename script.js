@@ -71,7 +71,7 @@ async function loadPopularMovies() {
     const angle = index * (360 / movieArray.length);
     carouselTrack.innerHTML += `<img class="carousel-poster"
     src="${movieData.Search[0].Poster}"
-    style="transform: rotateY(${angle}deg) translateZ(300px)">`;
+    style="transform: rotateY(${angle}deg) translateZ(450px)">`;
   }};
 
 loadPopularMovies();
@@ -81,4 +81,4 @@ setInterval(() => {
   carouselTrack.style.transform = `rotateY(${ringAngle}deg)`
 
   }
-, 50);
+, 100);

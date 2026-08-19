@@ -50,7 +50,7 @@ header h1 {
 
 #popular-movies {
   max-width: 1000px;
-  margin: 0 auto 2.5rem;
+  margin: 2rem auto 2.5rem;
 }
 
 #popular-movies h2 {
@@ -58,6 +58,7 @@ header h1 {
   font-weight: 600;
   color: #ccc;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 #carousel-stage {
@@ -75,7 +76,7 @@ header h1 {
 
 .carousel-poster {
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   width: 140px;
   height: 210px;
