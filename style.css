@@ -121,3 +121,37 @@ header h1 {
   font-size: 0.95rem;
   margin: 0.5rem;
 }
+
+#back-link {
+  display: inline-block;
+  color: #ccc;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+}
+
+#back-link:hover {
+  color: #fff;
+}
+
+#movie-detail {
+  display: flex;
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#detail-poster {
+  width: 260px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+#detail-info h2 {
+  margin-top: 0;
+}
+
+#detail-info p {
+  color: #ccc;
+  line-height: 1.5;
+}
