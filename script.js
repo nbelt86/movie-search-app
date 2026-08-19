@@ -10,6 +10,9 @@ const movieArray = ["Inception", "The Matrix", "Interstellar", "Parasite",
   "Get Out", "Everything Everywhere All at Once"
 ];
 const carouselTrack = document.querySelector("#carousel-track");
+let ringAngle = 0;
+
+
 
 async function searchMovies() {
   const searchTerm = searchInput.value.trim();
@@ -61,21 +64,21 @@ resultsSection.addEventListener("click", async (event) => {
 });
 
 async function loadPopularMovies() {
-  for (const title of movieArray) {
+  for (const [index, title] of movieArray.entries()) {
     const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${title}`;
     const response = await fetch(url);
     const movieData = await response.json();
+    const angle = index * (360 / movieArray.length);
     carouselTrack.innerHTML += `<img class="carousel-poster"
-    src="${movieData.Search[0].Poster}">`;
+    src="${movieData.Search[0].Poster}"
+    style="transform: rotateY(${angle}deg) translateZ(300px)">`;
   }};
 
 loadPopularMovies();
 
 setInterval(() => {
-  carouselTrack.scrollLeft += 150;
-  if (carouselTrack.clientWidth + carouselTrack.scrollLeft >=
-    carouselTrack.scrollWidth) {
-    carouselTrack.scrollLeft = 0
-  }
+  ringAngle += 1
+  carouselTrack.style.transform = `rotateY(${ringAngle}deg)`
 
-}, 1000);
+  }
+, 50);
