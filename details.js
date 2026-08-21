@@ -11,6 +11,12 @@ async function loadMovieInfo () {
   const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`;
   const response = await fetch(url);
   const movieInfo = await response.json();
+  poster.src = movieInfo.Poster;
+  title.textContent = movieInfo.Title;
+  meta.textContent = `${movieInfo.Year} ${movieInfo.Genre}
+  ${movieInfo.imdbRating}`;
+  plot.textContent = movieInfo.Plot;
+  director.textContent = movieInfo.Director;
 
 };
 
