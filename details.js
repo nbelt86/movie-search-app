@@ -1,6 +1,11 @@
 const apiKey = "e105a334";
 const params = new URLSearchParams(window.location.search)
 const imdbID = params.get("id")
+const poster = document.querySelector("#detail-poster")
+const title = document.querySelector("#detail-title")
+const meta = document.querySelector("#detail-meta")
+const plot = document.querySelector("#detail-plot")
+const director = document.querySelector("#detail-director")
 
 async function loadMovieInfo () {
   const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`;
