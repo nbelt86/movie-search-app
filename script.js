@@ -56,14 +56,11 @@ searchInput.addEventListener("keydown", (event) => {
   }
 });
 
-resultsSection.addEventListener("click", async (event) => {
+resultsSection.addEventListener("click", (event) => {
   const card = event.target.closest(".movie-card");
   if (card) {
     const imdbId = card.dataset.imdbid;
-    const url = `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbId}`;
-    const response = await fetch(url);
-    const details = await response.json();
-    alert (`${details.Title}\n\n${details.Plot}\n\nRating: ${details.imdbRating}`);
+    window.location.href = `details.html?id=${imdbId}`;
   }
 });
 
