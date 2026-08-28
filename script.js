@@ -1,5 +1,6 @@
 // This is yours to build, one line at a time.
 const apiKey = "e105a334";
+const posterFallback = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='445'%3E%3Crect width='100%25' height='100%25' fill='%232a2a2a'/%3E%3Ctext x='50%25' y='50%25' fill='%23777' font-family='Arial, sans-serif' font-size='18' text-anchor='middle' dy='.3em'%3ENo Poster%3C/text%3E%3C/svg%3E";
 const searchInput = document.querySelector("#search-input");
 const searchBtn = document.querySelector("#search-btn");
 const resultsSection = document.querySelector("#results");
@@ -20,13 +21,13 @@ async function searchMovies() {
 
   try {
     if (searchTerm === "") {
-      resultsSection.innerHTML = "Please enter a movie title.";
+      resultsSection.innerHTML = `<p class="status-message">Please enter a movie title.</p>`;
       return;
     }
 
     popularMovies.style.display = "none";
 
-    resultsSection.innerHTML = "Searching...please wait.";
+    resultsSection.innerHTML = `<p class="status-message status-loading">Searching...please wait.</p>`;
     const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}`;
     const response = await fetch(url);
     const movieData = await response.json();
@@ -34,17 +35,19 @@ async function searchMovies() {
     if (movieData.Response === "True") {
       resultsSection.innerHTML = movieData.Search.map(movie => `
         <div class = "movie-card" data-imdbid = "${movie.imdbID}">
-          <img src="${movie.Poster}" alt="${movie.Title}">
-          <h3>${movie.Title} (${movie.Year})</h3>
-
+          <img src="${movie.Poster}" alt="${movie.Title}" onerror="this.onerror=null;this.src='${posterFallback}';">
+          <div class="movie-card-info">
+            <h3>${movie.Title}</h3>
+            <p class="movie-year">${movie.Year}</p>
+          </div>
         </div>
         `).join("")}
 
-    else resultsSection.innerHTML = "No movie found!";
+    else resultsSection.innerHTML = `<p class="status-message">No movie found!</p>`;
 
     searchInput.value = ""
   } catch (error) {
-    resultsSection.innerHTML = "Something went wrong. Please try again."
+    resultsSection.innerHTML = `<p class="status-message status-error">Something went wrong. Please try again.</p>`;
   }
 
 };
@@ -71,7 +74,8 @@ async function loadPopularMovies() {
     const movieData = await response.json();
     const angle = index * (360 / movieArray.length);
     carouselTrack.innerHTML += `<img class="carousel-poster"
-    src="${movieData.Search[0].Poster}"
+    src="${movieData.Search[0].Poster}" alt="${title}"
+    onerror="this.onerror=null;this.src='${posterFallback}';"
     style="transform: rotateY(${angle}deg) translateZ(450px)">`;
   }};
 
