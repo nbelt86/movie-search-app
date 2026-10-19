@@ -10,6 +10,7 @@
 
   <header>
     <h1>Movie Search</h1>
+    <a href="favorites.html" id="favorites-link">&#9733; My List (<span id="favorites-count">0</span>)</a>
   </header>
 
   <a href="index.html" id="back-link">&larr; Back to search</a>
@@ -17,7 +18,10 @@
   <section id="movie-detail">
     <img id="detail-poster" src="" alt="">
     <div id="detail-info">
-      <h2 id="detail-title"></h2>
+      <div class="detail-title-row">
+        <h2 id="detail-title"></h2>
+        <button id="detail-favorite-btn" class="favorite-btn" aria-label="Toggle favorite">&#9734;</button>
+      </div>
       <p id="detail-meta"></p>
       <p id="detail-rating"></p>
       <p id="detail-plot"></p>
@@ -25,6 +29,7 @@
     </div>
   </section>
 
+  <script src="favorites.js"></script>
   <script src="details.js"></script>
 </body>
 </html>

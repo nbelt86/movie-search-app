@@ -35,6 +35,7 @@ async function searchMovies() {
     if (movieData.Response === "True") {
       resultsSection.innerHTML = movieData.Search.map(movie => `
         <div class = "movie-card" data-imdbid = "${movie.imdbID}">
+          ${favoriteButtonMarkup(movie.imdbID)}
           <img src="${movie.Poster}" alt="${movie.Title}" onerror="this.onerror=null;this.src='${posterFallback}';">
           <div class="movie-card-info">
             <h3>${movie.Title}</h3>
@@ -60,6 +61,23 @@ searchInput.addEventListener("keydown", (event) => {
 });
 
 resultsSection.addEventListener("click", (event) => {
+  const favoriteBtn = event.target.closest(".favorite-btn");
+  if (favoriteBtn) {
+    event.stopPropagation();
+    const card = favoriteBtn.closest(".movie-card");
+    const movie = {
+      imdbID: favoriteBtn.dataset.imdbid,
+      Title: card.querySelector("h3").textContent,
+      Year: card.querySelector(".movie-year").textContent,
+      Poster: card.querySelector("img").src
+    };
+    toggleFavorite(movie);
+    favoriteBtn.classList.toggle("is-favorite");
+    favoriteBtn.innerHTML = isFavorite(movie.imdbID) ? "&#9733;" : "&#9734;";
+    updateFavoritesCount();
+    return;
+  }
+
   const card = event.target.closest(".movie-card");
   if (card) {
     const imdbId = card.dataset.imdbid;

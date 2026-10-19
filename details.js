@@ -9,6 +9,7 @@ const meta = document.querySelector("#detail-meta")
 const rating = document.querySelector("#detail-rating")
 const plot = document.querySelector("#detail-plot")
 const director = document.querySelector("#detail-director")
+const favoriteBtn = document.querySelector("#detail-favorite-btn")
 
 async function loadMovieInfo () {
   if (!imdbID) {
@@ -39,6 +40,20 @@ async function loadMovieInfo () {
     }
     plot.textContent = movieInfo.Plot;
     director.textContent = movieInfo.Director;
+
+    favoriteBtn.classList.toggle("is-favorite", isFavorite(imdbID));
+    favoriteBtn.innerHTML = isFavorite(imdbID) ? "&#9733;" : "&#9734;";
+    favoriteBtn.addEventListener("click", () => {
+      toggleFavorite({
+        imdbID: imdbID,
+        Title: movieInfo.Title,
+        Year: movieInfo.Year,
+        Poster: movieInfo.Poster
+      });
+      favoriteBtn.classList.toggle("is-favorite");
+      favoriteBtn.innerHTML = isFavorite(imdbID) ? "&#9733;" : "&#9734;";
+      updateFavoritesCount();
+    });
   } catch (error) {
     movieDetail.innerHTML = `<p class="status-message status-error">Something went wrong loading this movie. Please try again.</p>`;
   }

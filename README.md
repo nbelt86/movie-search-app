@@ -11,6 +11,7 @@ A simple movie search app built with vanilla HTML, CSS, and JavaScript, using th
 - Handles empty searches and searches with no results
 - Handles network/API errors gracefully
 - Click any movie card to view more details (plot, rating) fetched from the API
+- Save movies to a "My List" favorites page, persisted in `localStorage`
 - Responsive results grid with hover effects
 
 ## Built with
